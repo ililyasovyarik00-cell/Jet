@@ -3,59 +3,78 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#2563eb">
+<meta name="theme-color" content="#0284c7">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
-<title>Дальность струи</title>
+<title>chorro</title>
 <style>
-:root{--bg:#fff;--fg:#14171a;--muted:#667;--line:#d9dde3;--card:#f4f6f8;--acc:#2563eb}
-@media (prefers-color-scheme:dark){:root{--bg:#14171a;--fg:#eceff3;--muted:#9aa4b2;--line:#2c323a;--card:#1d2227;--acc:#60a5fa}}
+:root{--g:linear-gradient(160deg,#e0f2fe,#f0fdfa);--fg:#0b2a3c;--muted:#4b6b80;--line:#cfe3ee;--card:rgba(255,255,255,.78);--panel:rgba(240,249,255,.95);--acc:#0284c7;--acc2:#06b6d4}
+@media (prefers-color-scheme:dark){:root{--g:linear-gradient(160deg,#04202f,#0a3a4f);--fg:#e6f6ff;--muted:#8fb4c8;--line:#1f4a60;--card:rgba(255,255,255,.07);--panel:rgba(5,32,48,.95);--acc:#38bdf8;--acc2:#22d3ee}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:760px;margin:0 auto;padding:0 14px 24px}
-.top{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0 8px;border-bottom:1px solid var(--line)}
-h1{font-size:17px;margin:0 0 6px}
-canvas{width:100%;height:230px;display:block}
-.res{font-size:14px;margin-top:6px}.res b{color:var(--acc)}
-.leg{display:flex;flex-wrap:wrap;gap:2px 12px;font-size:12px;color:var(--muted)}
-.leg i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:4px}
-.s{background:var(--card);border-radius:12px;padding:10px 12px;margin-top:10px}
-.s div{display:flex;justify-content:space-between;font-size:14px}
-.s span{color:var(--acc);font-weight:600}
-input[type=range]{width:100%;margin:8px 0 2px;accent-color:var(--acc)}
-.note{font-size:12px;color:var(--muted);margin-top:12px}
+body{margin:0;min-height:100vh;background:var(--g) fixed;color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:0 12px 28px}
+.hd{padding:calc(env(safe-area-inset-top,0px) + 10px) 0 6px}
+h1{font-size:18px;margin:0;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
+.top{position:sticky;top:0;z-index:2;background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:6px 12px 8px;margin:0 -12px;border-radius:0 0 16px 16px;box-shadow:0 6px 16px rgba(2,60,100,.15)}
+#c{width:100%;height:220px;display:block;border-radius:14px;touch-action:none;cursor:ew-resize}
+.dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:5px}
+.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
+.dots i.on{background:var(--acc)}
+.dots{position:relative}
+.zg{position:absolute;right:0;display:flex;gap:4px;visibility:hidden}
+.dots .zg button{width:30px;font-size:16px}
+.dots button{font:14px system-ui;color:var(--acc);background:var(--card);border:1px solid var(--line);border-radius:999px;width:44px;height:26px;padding:0}
+.leg{display:flex;flex-wrap:wrap;gap:0 12px;font-size:11px;color:var(--muted);margin-top:4px}
+.ln{display:inline-block;width:18px;border-top:3px solid var(--acc);margin-right:5px;vertical-align:middle}
+.ln.d{border-top-style:dashed}
+.res{font-size:12px;margin-top:3px}.res b{color:var(--acc)}
+.row{display:flex;gap:6px;margin-top:6px}
+.row button{font:13px system-ui;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
+.row button:last-child{margin-left:auto;color:var(--acc);font-weight:600}
+.s{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:7px 10px}
+.s>div{display:flex;justify-content:space-between;flex-wrap:wrap;column-gap:6px;font-size:13px}
+.s span{color:var(--acc);font-weight:700}
+input[type=range]{width:100%;margin:6px 0 0;accent-color:var(--acc)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+details.s{margin-top:10px}summary{font-size:13px;color:var(--muted)}
+details .grid{margin-top:6px}
+.note{font-size:12px;color:var(--muted);margin-top:14px}
 </style>
 </head>
 <body>
 <main>
+<div class="hd"><h1>💧 chorro</h1></div>
 <div class="top">
-<h1>💧 Дальность струи от угла</h1>
 <canvas id="c"></canvas>
-<div class="leg"><span><i style="background:#3b82f6"></i>без сопротивления</span><span><i style="background:#f59e0b"></i>с сопротивлением</span></div>
+<div class="dots"><button id="vl">◀</button><i class="on"></i><i></i><button id="vr">▶</button><div class="zg" id="zg"><button id="zo">−</button><button id="zi">+</button><button id="zf">⤢</button></div></div>
+<div class="leg"><span><i class="ln"></i>с сопротивлением</span><span><i class="ln d"></i>без сопротивления</span><span id="lb">◯ лучший угол</span></div>
 <div class="res" id="res"></div>
+<div class="row"><button id="m">−1°</button><button id="p">+1°</button><button id="e" hidden>Стереть</button><button id="g">Запомнить кривую</button></div>
 </div>
-<div id="sl"></div>
-<p class="note">Скорость струи по Торричелли: v₀ = φ·√(2gH). Высоту воды H считайте до отверстия, h — высота отверстия над столом.</p>
+<div class="grid" id="sl"></div>
+<details class="s"><summary>Поправки: φ и k</summary><div class="grid" id="sl2"></div></details>
+<p class="note">Стрелки ◀ ▶ под рисунком переключают вид: график дальности от угла и сцена со струёй. Угол меняется перетаскиванием (на графике — точка, на сцене — бутылка) или кнопками −1° / +1°. «Запомнить кривую» оставляет бледную копию, чтобы увидеть, как кривая сдвигается при изменении H или h. На сцене масштаб не меняется сам: если струя не помещается, нажмите − или ⤢ (подогнать). Скорость по Торричелли: v₀ = φ·√(2gH).</p>
 </main>
 
 <script>
 const G = 9.81, $ = id => document.getElementById(id);
 const P = [
-  { id: 'a', name: 'Угол к горизонту', min: 0, max: 90, step: 1, val: 30, u: '°' },
-  { id: 'H', name: 'Высота воды над отверстием H', min: 0, max: 50, step: 0.5, val: 15, u: 'см' },
-  { id: 'h', name: 'Высота отверстия над столом h', min: 0, max: 50, step: 0.5, val: 30, u: 'см' },
-  { id: 'phi', name: 'Коэффициент скорости φ', min: 0.9, max: 1, step: 0.01, val: 0.97, u: '' },
+  { id: 'H', name: 'Уровень воды H', min: 0, max: 100, step: 0.5, val: 15, u: 'см' },
+  { id: 'h', name: 'Высота отверстия h', min: 0, max: 150, step: 0.5, val: 30, u: 'см' },
+  { id: 'phi', name: 'Коэфф. скорости φ', min: 0.9, max: 1, step: 0.01, val: 0.97, u: '' },
   { id: 'k', name: 'Сопротивление k', min: 0, max: 0.05, step: 0.001, val: 0.02, u: '1/м' }
 ];
-$('sl').innerHTML = P.map(p => `<div class="s"><div>${p.name}<span id="v${p.id}"></span></div>
-<input type="range" id="${p.id}" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.val}"></div>`).join('');
+const mk = p => `<div class="s"><div>${p.name}<span id="v${p.id}"></span></div><input type="range" id="${p.id}" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.val}"></div>`;
+$('sl').innerHTML = P.slice(0, 2).map(mk).join('');
+$('sl2').innerHTML = P.slice(2).map(mk).join('');
 const val = id => parseFloat($(id).value);
+let A = 30, cur = null, ghost = null, V = 0, runs = [], sceneP = { x: 0, y: 0 }, scPx = 0;
 
 function rangeIdeal(v0, a, h) {
   const vy = v0 * Math.sin(a), vx = v0 * Math.cos(a);
   return vx * (vy + Math.sqrt(vy * vy + 2 * G * h)) / G;
 }
-function simRange(v0, a, h, k, dt = 0.002) {
+function sim(v0, a, h, k, dt = 0.002) {
   let s = [0, h, v0 * Math.cos(a), v0 * Math.sin(a)];
   const f = s => { const v = Math.hypot(s[2], s[3]); return [s[2], s[3], -k * v * s[2], -G - k * v * s[3]]; };
   const ad = (s, d, m) => s.map((x, i) => x + m * d[i]);
@@ -68,48 +87,214 @@ function simRange(v0, a, h, k, dt = 0.002) {
   return s[0];
 }
 
-function plot(series, mark) {
-  const cv = $('c'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, hh = cv.clientHeight;
-  cv.width = w * dpr; cv.height = hh * dpr;
-  const c = cv.getContext('2d'); c.scale(dpr, dpr);
-  const cs = getComputedStyle(document.documentElement);
-  const muted = cs.getPropertyValue('--muted').trim(), line = cs.getPropertyValue('--line').trim();
-  const L = 40, R = 8, T = 8, B = 28;
-  let ymax = 0; series.forEach(s => s.y.forEach(v => ymax = Math.max(ymax, v)));
-  ymax = (ymax * 1.1) || 1;
-  const X = v => L + v / 90 * (w - L - R), Y = v => hh - B - v / ymax * (hh - T - B);
-  c.font = '11px system-ui'; c.lineWidth = 1;
-  const st = Math.pow(10, Math.floor(Math.log10(ymax / 4))), m = [1, 2, 5, 10].find(m => ymax / (m * st) <= 5) * st;
-  for (let v = 0; v <= ymax; v += m) {
-    c.strokeStyle = line; c.beginPath(); c.moveTo(L, Y(v)); c.lineTo(w - R, Y(v)); c.stroke();
-    c.fillStyle = muted; c.textAlign = 'right'; c.fillText(+v.toFixed(3), L - 4, Y(v) + 4);
-  }
-  for (let a = 0; a <= 90; a += 15) { c.fillStyle = muted; c.textAlign = 'center'; c.fillText(a + '°', X(a), hh - B + 14); }
-  c.save(); c.translate(10, T + (hh - T - B) / 2); c.rotate(-Math.PI / 2); c.textAlign = 'center'; c.fillStyle = muted; c.fillText('Дальность, м', 0, 0); c.restore();
-  series.forEach(s => {
-    c.strokeStyle = s.color; c.lineWidth = 2; c.setLineDash(s.dash ? [6, 4] : []); c.beginPath();
-    s.x.forEach((v, i) => i ? c.lineTo(X(v), Y(s.y[i])) : c.moveTo(X(v), Y(s.y[i])));
-    c.stroke(); c.setLineDash([]);
-  });
-  c.strokeStyle = muted; c.lineWidth = 1; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(mark.a), T); c.lineTo(X(mark.a), hh - B); c.stroke(); c.setLineDash([]);
-  [[mark.li, '#3b82f6'], [mark.ld, '#f59e0b']].forEach(([v, col]) => { c.fillStyle = col; c.beginPath(); c.arc(X(mark.a), Y(v), 5, 0, 7); c.fill(); });
-}
-
-function update() {
-  const a = val('a'), H = val('H') / 100, h = val('h') / 100, phi = val('phi'), k = val('k');
+function compute() {
+  const H = val('H') / 100, h = val('h') / 100, phi = val('phi'), k = val('k');
   P.forEach(p => $('v' + p.id).textContent = ' ' + val(p.id) + ' ' + p.u);
-  const v0 = phi * Math.sqrt(2 * G * H), ang = [], li = [], ld = [];
-  for (let d = 1; d <= 89; d++) { ang.push(d); li.push(rangeIdeal(v0, d * Math.PI / 180, h)); ld.push(simRange(v0, d * Math.PI / 180, h, k)); }
-  const ar = a * Math.PI / 180, mi = rangeIdeal(v0, ar, h), md = simRange(v0, ar, h, k);
-  const oi = li.indexOf(Math.max(...li)), od = ld.indexOf(Math.max(...ld));
-  $('res').innerHTML = `v₀ = <b>${v0.toFixed(2)} м/с</b>. При ${a}°: <b>${(mi * 100).toFixed(1)} см</b> (без сопр.), <b>${(md * 100).toFixed(1)} см</b> (с сопр.)<br>Лучший угол: ${ang[oi]}° (без сопр.), ${ang[od]}° (с сопр.)`;
-  plot([{ x: ang, y: li, color: '#3b82f6' }, { x: ang, y: ld, color: '#f59e0b', dash: true }], { a, li: mi, ld: md });
+  const v0 = phi * Math.sqrt(2 * G * H), li = [], ld = [];
+  for (let d = 0; d <= 90; d++) { const r = d * Math.PI / 180; li.push(rangeIdeal(v0, r, h)); ld.push(sim(v0, r, h, k)); }
+  cur = { v0, li, ld, oi: li.indexOf(Math.max(...li)), od: ld.indexOf(Math.max(...ld)) };
+  text(); draw();
+}
+function text() {
+  $('res').innerHTML = `Угол <b>${A}°</b>: <b>${(cur.ld[A] * 100).toFixed(1)} см</b> с сопр., ${(cur.li[A] * 100).toFixed(1)} см без. Лучший угол: ${cur.od}° / ${cur.oi}°. v₀ = ${cur.v0.toFixed(2)} м/с`;
+}
+function setA(v) { A = Math.max(0, Math.min(90, Math.round(v))); text(); draw(); }
+
+function drawGraph() {
+  const cv = $('c'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
+  cv.width = w * dpr; cv.height = h * dpr;
+  const c = cv.getContext('2d'); c.scale(dpr, dpr);
+  const GH = 34, L = 46, R = 12, T = 12, y0 = h - GH, NAVY = '#0b3a5c', GR = '#163d1a';
+  // небо
+  c.fillStyle = '#7cc7fa'; c.fillRect(0, 0, w, h);
+  const cloud = (x, y, s) => {
+    c.fillStyle = 'rgba(255,255,255,.7)';
+    [[0, 0, 10], [14, -6, 13], [30, 0, 9]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx * s, y + dy * s, r * s, 0, 7); c.fill(); });
+    c.fillRect(x, y, 30 * s, 9 * s);
+  };
+  cloud(w * 0.12, 40, 1); cloud(w * 0.5, 26, 0.6);
+  // трава
+  c.fillStyle = '#76a852'; c.fillRect(0, y0, w, GH);
+  c.fillStyle = '#5f9444';
+  for (let x = 16; x < w; x += 46) { c.beginPath(); c.moveTo(x, y0); c.lineTo(x + 4, y0 - 9); c.lineTo(x + 8, y0); c.fill(); }
+  // шкалы
+  const ymax = Math.max(...cur.li, ...cur.ld, ...(ghost ? [...ghost.li, ...ghost.ld] : [0])) * 1.15 || 0.1;
+  const X = a => L + a / 90 * (w - L - R), Y = v => y0 - v / ymax * (y0 - T);
+  const st = Math.pow(10, Math.floor(Math.log10(ymax / 3))), mm = [1, 2, 5, 10].find(q => ymax / (q * st) <= 4) * st;
+  c.font = '10px system-ui'; c.lineWidth = 1;
+  for (let v = mm; v <= ymax; v += mm) {
+    c.strokeStyle = 'rgba(255,255,255,.45)'; c.beginPath(); c.moveTo(L, Y(v)); c.lineTo(w - R, Y(v)); c.stroke();
+    c.fillStyle = NAVY; c.textAlign = 'right'; c.fillText(+(v * 100).toFixed(1) + ' см', L - 4, Y(v) + 3);
+  }
+  for (let a = 0; a <= 90; a += 15) { c.fillStyle = GR; c.textAlign = 'center'; c.fillText(a + '°', Math.min(w - 12, Math.max(14, X(a))), y0 + 20); }
+  // кривые
+  const line = (arr, dash, col, lw) => {
+    c.strokeStyle = col; c.lineWidth = lw; c.setLineDash(dash ? [7, 5] : []); c.beginPath();
+    arr.forEach((v, i) => i ? c.lineTo(X(i), Y(v)) : c.moveTo(X(i), Y(v)));
+    c.stroke(); c.setLineDash([]);
+  };
+  if (ghost) { line(ghost.ld, 0, 'rgba(255,255,255,.4)', 2); line(ghost.li, 1, 'rgba(255,255,255,.4)', 2); }
+  c.shadowColor = 'rgba(11,58,92,.35)'; c.shadowBlur = 3;
+  line(cur.li, 1, '#fff', 2.5); line(cur.ld, 0, '#fff', 3);
+  c.shadowBlur = 0;
+  // лучший угол
+  const mx = X(cur.od), my = Y(cur.ld[cur.od]);
+  c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.arc(mx, my, 6, 0, 7); c.stroke();
+  c.font = 'bold 11px system-ui'; c.fillStyle = NAVY; c.textAlign = 'center';
+  c.fillText(`${cur.od}° · ${(cur.ld[cur.od] * 100).toFixed(0)} см`, Math.min(w - 44, Math.max(L + 30, mx)), Math.max(T + 8, my - 11));
+  // выбранный угол
+  c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 1; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(A), T); c.lineTo(X(A), y0); c.stroke(); c.setLineDash([]);
+  c.fillStyle = '#fff'; c.beginPath(); c.arc(X(A), Y(cur.li[A]), 3.5, 0, 7); c.fill();
+  c.fillStyle = '#ffd54a'; c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.arc(X(A), Y(cur.ld[A]), 7, 0, 7); c.fill(); c.stroke();
+  // бутылка, наклонённая на угол A
+  c.save(); c.translate(w - 56, 52); c.rotate(-A * Math.PI / 180);
+  c.strokeStyle = '#8a5a34'; c.lineWidth = 3; c.beginPath(); c.moveTo(-34, 0); c.lineTo(-52, 0); c.stroke();
+  c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath(); c.roundRect(-34, -9, 40, 18, 5); c.fill();
+  c.fillStyle = '#bfe3fb'; c.beginPath(); c.roundRect(-32, -7, 22, 14, 4); c.fill();
+  c.fillStyle = '#2563eb'; c.fillRect(6, -4, 6, 8);
+  c.fillStyle = '#2b2b2b'; c.fillRect(-24, -10, 3, 20); c.fillRect(-10, -10, 3, 20);
+  c.strokeStyle = '#fff'; c.lineWidth = 2; c.setLineDash([4, 3]); c.beginPath(); c.moveTo(13, 0); c.lineTo(34, 0); c.stroke();
+  c.restore();
 }
 
-P.forEach(p => $(p.id).addEventListener('input', update));
-window.addEventListener('resize', update);
-matchMedia('(prefers-color-scheme: dark)').addEventListener('change', update);
-update();
+function draw() { V ? drawScene() : drawGraph(); }
+
+function simTraj(v0, a, h, k, dt = 0.003) {
+  let s = [0, h, v0 * Math.cos(a), v0 * Math.sin(a)]; const xs = [0], ys = [h];
+  const f = s => { const v = Math.hypot(s[2], s[3]); return [s[2], s[3], -k * v * s[2], -G - k * v * s[3]]; };
+  const ad = (s, d, m) => s.map((x, i) => x + m * d[i]);
+  for (let n = 0; n < 60000; n++) {
+    const k1 = f(s), k2 = f(ad(s, k1, dt / 2)), k3 = f(ad(s, k2, dt / 2)), k4 = f(ad(s, k3, dt));
+    const ns = s.map((x, i) => x + dt / 6 * (k1[i] + 2 * k2[i] + 2 * k3[i] + k4[i]));
+    if (ns[1] < 0) { xs.push(s[0] + s[1] / (s[1] - ns[1]) * (ns[0] - s[0])); ys.push(0); break; }
+    s = ns; xs.push(s[0]); ys.push(s[1]);
+  }
+  return { xs, ys };
+}
+function idealTraj(v0, a, h) {
+  const vy = v0 * Math.sin(a), vx = v0 * Math.cos(a), T = (vy + Math.sqrt(vy * vy + 2 * G * h)) / G, xs = [], ys = [];
+  for (let i = 0; i <= 60; i++) { const t = T * i / 60; xs.push(vx * t); ys.push(Math.max(0, h + vy * t - G * t * t / 2)); }
+  return { xs, ys };
+}
+
+function drawScene() {
+  const cv = $('c'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, H = cv.clientHeight;
+  cv.width = w * dpr; cv.height = H * dpr;
+  const c = cv.getContext('2d'); c.scale(dpr, dpr);
+  const GH = 34, L = 66, R = 16, T = 14, y0 = H - GH, NAVY = '#0b3a5c', GR = '#163d1a';
+  const h = val('h') / 100, ar = A * Math.PI / 180;
+  const tD = simTraj(cur.v0, ar, h, val('k')), tI = idealTraj(cur.v0, ar, h);
+  if (!scPx) scPx = fitScale();
+  const sc = scPx, xmax = (w - L - R) / sc, X = v => L + v * sc, Y = v => y0 - v * sc;
+  const my = Y(h);
+  // небо, облака, трава
+  c.fillStyle = '#7cc7fa'; c.fillRect(0, 0, w, H);
+  c.fillStyle = 'rgba(255,255,255,.7)';
+  [[w * 0.12, 40, 1], [w * 0.55, 26, 0.6]].forEach(([x, y, k]) => {
+    [[0, 0, 10], [14, -6, 13], [30, 0, 9]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx * k, y + dy * k, r * k, 0, 7); c.fill(); });
+    c.fillRect(x, y, 30 * k, 9 * k);
+  });
+  c.fillStyle = '#76a852'; c.fillRect(0, y0, w, GH);
+  c.fillStyle = '#5f9444';
+  for (let x = 16; x < w; x += 46) { c.beginPath(); c.moveTo(x, y0); c.lineTo(x + 4, y0 - 9); c.lineTo(x + 8, y0); c.fill(); }
+  // линейка в сантиметрах
+  const tg = xmax / 4, st = Math.pow(10, Math.floor(Math.log10(tg))), mm = [1, 2, 5, 10].find(q => tg <= q * st) * st;
+  c.font = '10px system-ui'; c.textAlign = 'center'; c.strokeStyle = GR; c.fillStyle = GR; c.lineWidth = 1;
+  for (let v = 0; v <= xmax * 1.02; v += mm) {
+    c.beginPath(); c.moveTo(X(v), y0); c.lineTo(X(v), y0 + 5); c.stroke();
+    c.fillText(+(v * 100).toFixed(1), X(v), y0 + 16);
+  }
+  c.textAlign = 'right'; c.fillText('см', w - 4, y0 + 16);
+  // прошлые опыты
+  c.textAlign = 'center';
+  runs.forEach(r => {
+    c.strokeStyle = 'rgba(255,255,255,.4)'; c.lineWidth = 2; c.beginPath();
+    r.xs.forEach((v, i) => i ? c.lineTo(X(v), Y(r.ys[i])) : c.moveTo(X(v), Y(r.ys[i]))); c.stroke();
+    const xe = r.xs[r.xs.length - 1];
+    c.fillStyle = '#ffd54a'; c.beginPath(); c.arc(X(xe), y0, 3.5, 0, 7); c.fill();
+    c.fillStyle = GR; c.font = 'bold 10px system-ui'; c.fillText(r.a + '°', Math.min(w - 14, X(xe)), y0 + 29);
+  });
+  // струя
+  const path = (t, dash, lw) => {
+    c.strokeStyle = '#fff'; c.lineWidth = lw; c.setLineDash(dash ? [7, 5] : []); c.beginPath();
+    t.xs.forEach((v, i) => i ? c.lineTo(X(v), Y(t.ys[i])) : c.moveTo(X(v), Y(t.ys[i]))); c.stroke(); c.setLineDash([]);
+  };
+  c.shadowColor = 'rgba(11,58,92,.35)'; c.shadowBlur = 3;
+  path(tI, 1, 2.5); path(tD, 0, 3);
+  c.shadowBlur = 0;
+  // всплеск и подпись дальности
+  const xe = tD.xs[tD.xs.length - 1];
+  c.fillStyle = '#fff';
+  [[-7, -5], [0, -9], [7, -5]].forEach(([dx, dy]) => { c.beginPath(); c.arc(X(xe) + dx, y0 + dy, 2.2, 0, 7); c.fill(); });
+  c.font = 'bold 11px system-ui'; c.fillStyle = NAVY; c.textAlign = 'center';
+  c.fillText((xe * 100).toFixed(0) + ' см', Math.min(w - 26, Math.max(26, X(xe))), y0 - 16);
+  if (X(xe) > w - R + 1 || my < T) { c.fillText('Не помещается: нажмите − или ⤢', w / 2, 12); }
+  // высота отверстия h
+  if (h > 0) {
+    c.strokeStyle = NAVY; c.fillStyle = NAVY; c.lineWidth = 1;
+    c.beginPath(); c.moveTo(12, y0); c.lineTo(12, my); c.moveTo(8, my); c.lineTo(16, my); c.stroke();
+    c.font = 'bold 10px system-ui'; c.textAlign = 'left';
+    c.fillText('h ' + (h * 100).toFixed(0), 17, Math.min(y0 - 8, Math.max(T + 8, (y0 + my) / 2)));
+  }
+  // бутылка: носик в точке начала струи
+  sceneP = { x: X(0), y: Y(h) };
+  c.save(); c.translate(sceneP.x, sceneP.y); c.rotate(-ar);
+  c.strokeStyle = '#8a5a34'; c.lineWidth = 3; c.beginPath(); c.moveTo(-46, 0); c.lineTo(-66, 0); c.stroke();
+  c.fillStyle = 'rgba(255,255,255,.92)'; c.beginPath(); c.roundRect(-46, -9, 40, 18, 5); c.fill();
+  c.fillStyle = '#bfe3fb'; c.beginPath(); c.roundRect(-44, -7, 22, 14, 4); c.fill();
+  c.fillStyle = '#2563eb'; c.fillRect(-6, -4, 6, 8);
+  c.fillStyle = '#2b2b2b'; c.fillRect(-36, -10, 3, 20); c.fillRect(-22, -10, 3, 20);
+  c.restore();
+  c.fillStyle = '#ffd54a'; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.beginPath(); c.arc(sceneP.x, sceneP.y, 3.5, 0, 7); c.fill(); c.stroke();
+}
+
+function fitScale() {
+  const cv = $('c'), w = cv.clientWidth, H = cv.clientHeight, L = 66, R = 16, T = 14, y0 = H - 34, h = val('h') / 100;
+  return Math.min((w - L - R) / Math.max(0.05, ...cur.li, ...runs.flatMap(t => t.xs)),
+    (y0 - T) / Math.max(0.05, h + cur.v0 * cur.v0 / (2 * G), ...runs.flatMap(t => t.ys))) * 0.95;
+}
+function btn() {
+  $('g').textContent = V ? 'Запомнить опыт' : (ghost ? 'Забыть кривую' : 'Запомнить кривую');
+  $('e').hidden = !(V && runs.length);
+}
+function setV(v) {
+  V = v;
+  document.querySelectorAll('.dots i').forEach((d, i) => d.classList.toggle('on', i === V));
+  $('lb').style.display = V ? 'none' : '';
+  $('c').style.touchAction = 'none';
+  $('zg').style.visibility = V ? 'visible' : 'hidden';
+  $('c').style.cursor = V ? 'grab' : 'ew-resize';
+  btn(); draw();
+}
+$('vl').onclick = $('vr').onclick = () => setV(1 - V);
+$('e').onclick = () => { runs = []; btn(); draw(); };
+$('zo').onclick = () => { scPx /= 1.25; draw(); };
+$('zi').onclick = () => { scPx *= 1.25; draw(); };
+$('zf').onclick = () => { scPx = fitScale(); draw(); };
+
+P.forEach(p => $(p.id).addEventListener('input', compute));
+$('m').onclick = () => setA(A - 1);
+$('p').onclick = () => setA(A + 1);
+$('g').onclick = () => {
+  if (V) { const t = simTraj(cur.v0, A * Math.PI / 180, val('h') / 100, val('k')); runs.push({ a: A, xs: t.xs, ys: t.ys }); if (runs.length > 6) runs.shift(); }
+  else ghost = ghost ? null : { li: cur.li, ld: cur.ld };
+  btn(); draw();
+};
+const cv = $('c'); let drag = false, a0 = 0, th0 = 0, yd = 0;
+const ptrAng = e => { const r = cv.getBoundingClientRect(); return Math.atan2(sceneP.y - (e.clientY - r.top), e.clientX - r.left - sceneP.x) * 180 / Math.PI; };
+const mv = e => {
+  const r = cv.getBoundingClientRect();
+  if (V) {
+    const dx = e.clientX - r.left - sceneP.x, dy = e.clientY - r.top - sceneP.y;
+    if (Math.hypot(dx, dy) < 14) setA(a0 + (yd - e.clientY) / 2);
+    else { let d = ptrAng(e) - th0; d = ((d + 540) % 360) - 180; setA(a0 + d); }
+  } else { const L = 46, R = 12; setA((e.clientX - r.left - L) / (r.width - L - R) * 90); }
+};
+cv.addEventListener('pointerdown', e => { e.preventDefault(); drag = true; cv.setPointerCapture(e.pointerId); a0 = A; th0 = ptrAng(e); yd = e.clientY; mv(e); });
+cv.addEventListener('pointermove', e => { if (drag) mv(e); });
+['pointerup', 'pointercancel', 'lostpointercapture'].forEach(t => cv.addEventListener(t, () => drag = false));
+window.addEventListener('resize', draw);
+compute();
 try { if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js'); } catch (e) {}
 </script>
 </body>

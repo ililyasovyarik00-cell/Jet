@@ -61,7 +61,7 @@ jobs:
           html = html + snippet if i == -1 else html[:i] + snippet + html[i:]
           open(p, "w", encoding="utf-8").write(html)
           EOF
-     
+    
       - name: Icon
         run: |
           pip install --break-system-packages pillow || sudo apt-get install -y python3-pil

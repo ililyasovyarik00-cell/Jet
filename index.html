@@ -3,66 +3,70 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0284c7">
+<meta name="theme-color" content="#2a3138">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
 <title>chorro</title>
 <style>
-:root{--g:linear-gradient(160deg,#e0f2fe,#f0fdfa);--fg:#0b2a3c;--muted:#4b6b80;--line:#cfe3ee;--card:rgba(255,255,255,.78);--panel:rgba(240,249,255,.95);--acc:#0284c7;--acc2:#06b6d4}
-@media (prefers-color-scheme:dark){:root{--g:linear-gradient(160deg,#04202f,#0a3a4f);--fg:#e6f6ff;--muted:#8fb4c8;--line:#1f4a60;--card:rgba(255,255,255,.07);--panel:rgba(5,32,48,.95);--acc:#38bdf8;--acc2:#22d3ee}}
-*{box-sizing:border-box}
-body{margin:0;min-height:100vh;background:var(--g) fixed;color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-main{max-width:720px;margin:0 auto;padding:0 12px 28px}
-.hd{padding:calc(env(safe-area-inset-top,0px) + 10px) 0 6px}
-h1{font-size:18px;margin:0;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:800}
-.top{position:sticky;top:0;z-index:2;background:var(--panel);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:6px 12px 8px;margin:0 -12px;border-radius:0 0 16px 16px;box-shadow:0 6px 16px rgba(2,60,100,.15)}
-#c{width:100%;height:220px;display:block;border-radius:14px;touch-action:none;cursor:ew-resize}
-.dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:5px}
-.dots i{width:7px;height:7px;border-radius:50%;background:var(--line)}
-.dots i.on{background:var(--acc)}
-.dots{position:relative}
-.zg{position:absolute;right:0;display:flex;gap:4px;visibility:hidden}
-.dots .zg button{width:30px;font-size:16px}
-.dots button{font:14px system-ui;color:var(--acc);background:var(--card);border:1px solid var(--line);border-radius:999px;width:44px;height:26px;padding:0}
-.leg{display:flex;flex-wrap:wrap;gap:0 12px;font-size:11px;color:var(--muted);margin-top:4px}
-.ln{display:inline-block;width:18px;border-top:3px solid var(--acc);margin-right:5px;vertical-align:middle}
-.ln.d{border-top-style:dashed}
-.res{font-size:12px;margin-top:3px}.res b{color:var(--acc)}
-.row{display:flex;gap:6px;margin-top:6px}
-.row button{font:13px system-ui;color:var(--fg);background:var(--card);border:1px solid var(--line);border-radius:999px;padding:6px 14px}
-.row button:last-child{margin-left:auto;color:var(--acc);font-weight:600}
-.s{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:7px 10px}
+:root{--bgi:radial-gradient(120% 55% at 50% 108%,#1d5a75 0,transparent 62%),radial-gradient(70% 40% at 0 0,#3a3560 0,transparent 70%),#2a3138;--sf:#323a43;--fg:#e8f1f6;--muted:#8da0ad;--acc:#2bb7e0;--acc2:#5ee0f2;--sh:6px 6px 14px rgba(0,0,0,.45),-4px -4px 12px rgba(255,255,255,.045);--in:inset 3px 3px 7px rgba(0,0,0,.5),inset -2px -2px 5px rgba(255,255,255,.05)}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{margin:0;min-height:100vh;background:var(--bgi) fixed;color:var(--fg);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:720px;margin:0 auto;padding:0 14px 100px}
+.hd{padding:calc(env(safe-area-inset-top,0px) + 10px) 4px 8px}
+h1{font-size:22px;margin:0;font-weight:800;letter-spacing:.5px}
+.top{position:sticky;top:0;z-index:2;background:var(--sf);padding:10px;margin:0 -4px;border-radius:0 0 26px 26px;box-shadow:var(--sh)}
+#c{width:100%;height:230px;display:block;border-radius:18px;touch-action:none;cursor:ew-resize;box-shadow:var(--in)}
+.dots{display:flex;justify-content:center;align-items:center;gap:8px;margin-top:9px;position:relative}
+.dots i{width:7px;height:7px;border-radius:50%;background:#46515c}
+.dots i.on{background:var(--acc2);box-shadow:0 0 8px var(--acc)}
+.zg{position:absolute;right:0;display:flex;gap:5px;visibility:hidden}
+.dots button,.row button{font:14px system-ui;color:var(--fg);background:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.04));border:1px solid rgba(255,255,255,.16);border-radius:999px;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);box-shadow:3px 3px 8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.22)}
+.dots button{width:44px;height:28px;padding:0;color:var(--acc2)}.dots .zg button{width:32px}
+.leg{display:flex;flex-wrap:wrap;gap:0 12px;font-size:11px;color:var(--muted);margin-top:8px}
+.ln{display:inline-block;width:18px;border-top:3px solid #fff;margin-right:5px;vertical-align:middle}.ln.d{border-top-style:dashed}
+.res{font-size:12px;margin-top:4px;color:var(--muted)}.res b{color:var(--acc2)}
+.row{display:flex;gap:7px;margin-top:9px}
+.row button{font-size:13px;padding:7px 14px}.row button:last-child{margin-left:auto;color:var(--acc2);font-weight:600}
+.s{background:var(--sf);border-radius:20px;padding:12px 16px;box-shadow:var(--sh)}
 .s>div{display:flex;justify-content:space-between;flex-wrap:wrap;column-gap:6px;font-size:13px}
-.s span{color:var(--acc);font-weight:700}
-input[type=range]{width:100%;margin:6px 0 0;accent-color:var(--acc)}
-.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
-details.s{margin-top:10px}summary{font-size:13px;color:var(--muted)}
-details .grid{margin-top:6px}
-.note{font-size:12px;color:var(--muted);margin-top:14px}
+.s span{color:var(--acc2);font-weight:700}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:14px;margin:12px 0 4px;border-radius:8px;background:linear-gradient(90deg,var(--acc),var(--acc2)) left/var(--p,50%) 100% no-repeat,#222930;box-shadow:var(--in)}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:28px;height:28px;border-radius:50%;border:0;background:radial-gradient(circle,var(--acc2) 0 20%,transparent 23%),linear-gradient(145deg,#556170,#2c343c);box-shadow:3px 4px 9px rgba(0,0,0,.6),-2px -2px 6px rgba(255,255,255,.1)}
+input[type=range]::-moz-range-thumb{width:28px;height:28px;border-radius:50%;border:0;background:radial-gradient(circle,var(--acc2) 0 20%,transparent 23%),linear-gradient(145deg,#556170,#2c343c);box-shadow:3px 4px 9px rgba(0,0,0,.6),-2px -2px 6px rgba(255,255,255,.1)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+details.s{margin-top:14px}summary{font-size:13px;color:var(--muted)}details .grid{margin-top:6px}
+.note{font-size:12px;color:var(--muted)}
+#nv{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(env(safe-area-inset-bottom,0px) + 14px);z-index:10;display:flex;gap:4px;padding:5px;border-radius:999px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:var(--sh)}
+#nv button{font:600 14px system-ui;color:var(--muted);background:none;border:0;border-radius:999px;padding:9px 28px}
+#nv .on{color:#06232d;background:linear-gradient(145deg,var(--acc2),var(--acc));box-shadow:0 0 14px rgba(43,183,224,.5)}
+#au{position:fixed;inset:0;z-index:5;overflow:auto;padding:calc(env(safe-area-inset-top,0px) + 24px) 18px 110px;background:var(--bgi)}
+.card{max-width:520px;margin:0 auto 16px;padding:20px}.card h2{margin:10px 0 8px;font-size:22px}.card h3{margin:0 0 8px;font-size:16px}.card p{margin:0 0 10px;line-height:1.5}
+.chips{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:10px}
+.chips div{background:linear-gradient(145deg,rgba(255,255,255,.12),rgba(255,255,255,.03));border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:7px 2px;text-align:center;box-shadow:3px 3px 8px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.2)}
+.chips small{display:block;font-size:10px;color:var(--muted)}.chips b{font-size:14px;color:var(--acc2);white-space:nowrap}
 </style>
 </head>
 <body>
 <main>
-<div class="hd"><h1>💧 chorro</h1></div>
+<div class="hd"><h1>chorro</h1></div>
 <div class="top">
 <canvas id="c"></canvas>
 <div class="dots"><button id="vl">◀</button><i class="on"></i><i></i><button id="vr">▶</button><div class="zg" id="zg"><button id="zo">−</button><button id="zi">+</button><button id="zf">⤢</button></div></div>
-<div class="leg"><span><i class="ln"></i>с сопротивлением</span><span><i class="ln d"></i>без сопротивления</span><span id="lb">◯ лучший угол</span></div>
-<div class="res" id="res"></div>
+<div class="chips"><div><small>Угол</small><b id="ca"></b></div><div><small>Дальность</small><b id="cr"></b></div><div><small>Лучший угол</small><b id="cb"></b></div><div><small>Скорость</small><b id="cv"></b></div></div>
 <div class="row"><button id="m">−1°</button><button id="p">+1°</button><button id="e" hidden>Стереть</button><button id="g">Запомнить кривую</button></div>
 </div>
 <div class="grid" id="sl"></div>
-<details class="s"><summary>Поправки: φ и k</summary><div class="grid" id="sl2"></div></details>
-<p class="note">Стрелки ◀ ▶ под рисунком переключают вид: график дальности от угла и сцена со струёй. Угол меняется перетаскиванием (на графике — точка, на сцене — бутылка) или кнопками −1° / +1°. «Запомнить кривую» оставляет бледную копию, чтобы увидеть, как кривая сдвигается при изменении H или h. На сцене масштаб не меняется сам: если струя не помещается, нажмите − или ⤢ (подогнать). Скорость по Торричелли: v₀ = φ·√(2gH).</p>
+<details class="s"><summary>Поправка φ</summary><div class="grid" id="sl2"></div></details>
+
 </main>
+<section id="au" hidden><div class="s card"><svg width="52" height="52" viewBox="0 0 24 24"><defs><linearGradient id="dg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#5ee0f2"/><stop offset="1" stop-color="#2b7fe0"/></linearGradient></defs><path d="M12 2.5C8 8 5.5 11.2 5.5 14.6a6.5 6.5 0 0 0 13 0C18.5 11.2 16 8 12 2.5z" fill="url(#dg)"/></svg><h2>Об авторе</h2><p>Приложение «chorro» создал <b>Ильясов Ярослав</b>, обучающийся группы <b>1РУПО2</b>.</p></div><div class="s card"><h3>О приложении</h3><p>Симулятор струи из бутылки: дальность зависит от угла, уровня воды H и высоты отверстия h.</p><p class="note">Стрелки ◀ ▶ переключают вид: столбики дальности по углам и сцена со струёй. Угол меняется перетаскиванием (по столбикам или за бутылку на сцене) и кнопками −1° / +1°. «Запомнить» оставляет бледные контуры столбиков, а на сцене сохраняет прошлые опыты, чтобы сравнивать при изменении H или h. На сцене масштаб не меняется сам: если струя не помещается, нажмите − или ⤢. Скорость по Торричелли: v₀ = φ·√(2gH).</p></div></section><nav id="nv"><button id="t1" class="on">Опыт</button><button id="t2">Автор</button></nav>
 
 <script>
 const G = 9.81, $ = id => document.getElementById(id);
 const P = [
   { id: 'H', name: 'Уровень воды H', min: 0, max: 100, step: 0.5, val: 15, u: 'см' },
   { id: 'h', name: 'Высота отверстия h', min: 0, max: 150, step: 0.5, val: 30, u: 'см' },
-  { id: 'phi', name: 'Коэфф. скорости φ', min: 0.9, max: 1, step: 0.01, val: 0.97, u: '' },
-  { id: 'k', name: 'Сопротивление k', min: 0, max: 0.05, step: 0.001, val: 0.02, u: '1/м' }
+  { id: 'phi', name: 'Коэфф. скорости φ', min: 0.9, max: 1, step: 0.01, val: 0.97, u: '' }
 ];
 const mk = p => `<div class="s"><div>${p.name}<span id="v${p.id}"></span></div><input type="range" id="${p.id}" min="${p.min}" max="${p.max}" step="${p.step}" value="${p.val}"></div>`;
 $('sl').innerHTML = P.slice(0, 2).map(mk).join('');
@@ -88,15 +92,16 @@ function sim(v0, a, h, k, dt = 0.002) {
 }
 
 function compute() {
-  const H = val('H') / 100, h = val('h') / 100, phi = val('phi'), k = val('k');
-  P.forEach(p => $('v' + p.id).textContent = ' ' + val(p.id) + ' ' + p.u);
+  const H = val('H') / 100, h = val('h') / 100, phi = val('phi');
+  P.forEach(p => { $('v' + p.id).textContent = ' ' + val(p.id) + ' ' + p.u; const e = $(p.id); e.style.setProperty('--p', (e.value - e.min) / (e.max - e.min) * 100 + '%'); });
   const v0 = phi * Math.sqrt(2 * G * H), li = [], ld = [];
-  for (let d = 0; d <= 90; d++) { const r = d * Math.PI / 180; li.push(rangeIdeal(v0, r, h)); ld.push(sim(v0, r, h, k)); }
+  for (let d = 0; d <= 90; d++) { const r = d * Math.PI / 180; li.push(rangeIdeal(v0, r, h)); ld.push(li[d]); }
   cur = { v0, li, ld, oi: li.indexOf(Math.max(...li)), od: ld.indexOf(Math.max(...ld)) };
   text(); draw();
 }
 function text() {
-  $('res').innerHTML = `Угол <b>${A}°</b>: <b>${(cur.ld[A] * 100).toFixed(1)} см</b> с сопр., ${(cur.li[A] * 100).toFixed(1)} см без. Лучший угол: ${cur.od}° / ${cur.oi}°. v₀ = ${cur.v0.toFixed(2)} м/с`;
+  $('ca').textContent = A + '°'; $('cr').textContent = (cur.li[A] * 100).toFixed(1) + ' см';
+  $('cb').textContent = cur.oi + '°'; $('cv').textContent = cur.v0.toFixed(2) + ' м/с';
 }
 function setA(v) { A = Math.max(0, Math.min(90, Math.round(v))); text(); draw(); }
 
@@ -104,58 +109,86 @@ function drawGraph() {
   const cv = $('c'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, h = cv.clientHeight;
   cv.width = w * dpr; cv.height = h * dpr;
   const c = cv.getContext('2d'); c.scale(dpr, dpr);
-  const GH = 34, L = 46, R = 12, T = 12, y0 = h - GH, NAVY = '#0b3a5c', GR = '#163d1a';
-  // небо
-  c.fillStyle = '#7cc7fa'; c.fillRect(0, 0, w, h);
-  const cloud = (x, y, s) => {
-    c.fillStyle = 'rgba(255,255,255,.7)';
-    [[0, 0, 10], [14, -6, 13], [30, 0, 9]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx * s, y + dy * s, r * s, 0, 7); c.fill(); });
-    c.fillRect(x, y, 30 * s, 9 * s);
+  const GH = 34, L = 30, R = 30, T = 12, y0 = h - GH, NAVY = '#e3f3fb', GR = '#e6f6d8';
+  bg(c, w, h, y0);
+  const AN = [0, 15, 30, 45, 60, 75, 90], near = AN.reduce((q, a) => Math.abs(a - A) < Math.abs(q - A) ? a : q), best = AN.reduce((q, a) => cur.li[a] > cur.li[q] ? a : q);
+  const ymax = Math.max(...cur.li, ...(ghost ? ghost.li : [0]), 0.05) * 1.2, X = a => L + a / 90 * (w - L - R), Y = v => y0 - v / ymax * (y0 - T - 18), bw = Math.min(34, (w - L - R) / 6 * .62);
+  c.font = '11px system-ui'; c.textAlign = 'left'; c.fillStyle = NAVY; c.fillText('Дальность, см', 12, 18);
+  AN.forEach(a => {
+    const x = X(a), v = cur.li[a], top = Y(v), sel = a === near;
+    if (ghost) { c.strokeStyle = 'rgba(255,255,255,.55)'; c.lineWidth = 1.5; c.setLineDash([4, 3]); c.beginPath(); c.roundRect(x - bw / 2, Y(ghost.li[a]), bw, y0 - Y(ghost.li[a]), [8, 8, 0, 0]); c.stroke(); c.setLineDash([]); }
+    if (y0 - top > 1) {
+      const g = c.createLinearGradient(0, top, 0, y0);
+      if (sel) { g.addColorStop(0, '#9af3ff'); g.addColorStop(1, '#2bb7e0'); } else { g.addColorStop(0, 'rgba(130,220,245,.8)'); g.addColorStop(1, 'rgba(43,127,224,.55)'); }
+      c.fillStyle = g; c.beginPath(); c.roundRect(x - bw / 2, top, bw, y0 - top, [8, 8, 0, 0]); c.fill();
+      c.fillStyle = 'rgba(255,255,255,.35)'; c.fillRect(x - bw / 2 + 4, top + 5, 3, Math.max(0, y0 - top - 10));
+    }
+    c.textAlign = 'center'; c.font = (sel ? 'bold ' : '') + '11px system-ui'; c.fillStyle = a === best ? '#ffd54a' : NAVY;
+    c.fillText((v * 100).toFixed(0), x, top - 6);
+  });
+  for (let a = 0; a <= 90; a += 15) { c.fillStyle = GR; c.font = '10px system-ui'; c.textAlign = 'center'; c.fillText(a + '°', X(a), y0 + 20); }
+  c.strokeStyle = 'rgba(255,255,255,.7)'; c.lineWidth = 1; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(A), T + 20); c.lineTo(X(A), y0); c.stroke(); c.setLineDash([]);
+  c.fillStyle = '#ffd54a'; c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.arc(X(A), y0, 7, 0, 7); c.fill(); c.stroke();
+}
+
+
+const rn = i => Math.abs(Math.sin(i * 12.9898) * 43758.5453) % 1;
+function bg(c, w, h, y0) {
+  let g = c.createLinearGradient(0, 0, 0, y0);
+  g.addColorStop(0, '#123f5e'); g.addColorStop(.65, '#2a76a0'); g.addColorStop(1, '#5fb3d4');
+  c.fillStyle = g; c.fillRect(0, 0, w, h);
+  const cl = (x, y, k, a) => {
+    const q = c.createLinearGradient(0, y - 16 * k, 0, y + 13 * k);
+    q.addColorStop(0, `rgba(255,255,255,${a})`); q.addColorStop(1, `rgba(160,200,230,${a * .75})`);
+    c.fillStyle = q; c.beginPath();
+    [[0, 0, 11], [14, -7, 14], [30, -3, 12], [43, 2, 9], [22, 4, 11]].forEach(([dx, dy, r]) => { c.moveTo(x + (dx + r) * k, y + dy * k); c.arc(x + dx * k, y + dy * k, r * k, 0, 7); });
+    c.fill();
   };
-  cloud(w * 0.12, 40, 1); cloud(w * 0.5, 26, 0.6);
-  // трава
-  c.fillStyle = '#76a852'; c.fillRect(0, y0, w, GH);
-  c.fillStyle = '#5f9444';
-  for (let x = 16; x < w; x += 46) { c.beginPath(); c.moveTo(x, y0); c.lineTo(x + 4, y0 - 9); c.lineTo(x + 8, y0); c.fill(); }
-  // шкалы
-  const ymax = Math.max(...cur.li, ...cur.ld, ...(ghost ? [...ghost.li, ...ghost.ld] : [0])) * 1.15 || 0.1;
-  const X = a => L + a / 90 * (w - L - R), Y = v => y0 - v / ymax * (y0 - T);
-  const st = Math.pow(10, Math.floor(Math.log10(ymax / 3))), mm = [1, 2, 5, 10].find(q => ymax / (q * st) <= 4) * st;
-  c.font = '10px system-ui'; c.lineWidth = 1;
-  for (let v = mm; v <= ymax; v += mm) {
-    c.strokeStyle = 'rgba(255,255,255,.45)'; c.beginPath(); c.moveTo(L, Y(v)); c.lineTo(w - R, Y(v)); c.stroke();
-    c.fillStyle = NAVY; c.textAlign = 'right'; c.fillText(+(v * 100).toFixed(1) + ' см', L - 4, Y(v) + 3);
+  cl(w * .08, 46, 1.1, .85); cl(w * .5, 30, .7, .6); cl(w * .78, 64, .9, .7);
+  [['#2b6b5a', .55, .012, 0], ['#3d8a52', .3, .02, 2]].forEach(([col, a, f, p]) => {
+    c.fillStyle = col; c.beginPath(); c.moveTo(0, y0);
+    for (let x = 0; x <= w; x += 6) c.lineTo(x, y0 - 10 - a * 14 - Math.sin(x * f + p) * 8 * a);
+    c.lineTo(w, y0); c.fill();
+  });
+  g = c.createLinearGradient(0, y0, 0, h); g.addColorStop(0, '#4f9a47'); g.addColorStop(1, '#2c5f33');
+  c.fillStyle = g; c.fillRect(0, y0, w, h - y0);
+  c.lineWidth = 1.3;
+  for (let i = 0; i < w / 4; i++) {
+    const x = i * 4 + rn(i) * 3, hh = 6 + rn(i + 9) * 11, l = (rn(i + 3) - .5) * 7;
+    c.strokeStyle = ['#79c25a', '#5aa84a', '#8fd36a'][i % 3];
+    c.beginPath(); c.moveTo(x, y0 + 3); c.quadraticCurveTo(x + l * .3, y0 - hh * .5, x + l, y0 - hh); c.stroke();
   }
-  for (let a = 0; a <= 90; a += 15) { c.fillStyle = GR; c.textAlign = 'center'; c.fillText(a + '°', Math.min(w - 12, Math.max(14, X(a))), y0 + 20); }
-  // кривые
-  const line = (arr, dash, col, lw) => {
-    c.strokeStyle = col; c.lineWidth = lw; c.setLineDash(dash ? [7, 5] : []); c.beginPath();
-    arr.forEach((v, i) => i ? c.lineTo(X(i), Y(v)) : c.moveTo(X(i), Y(v)));
-    c.stroke(); c.setLineDash([]);
+  for (let i = 0; i < 6; i++) {
+    const x = w * (.08 + i * .17) + rn(i + 30) * 20;
+    c.strokeStyle = '#4a9a40'; c.beginPath(); c.moveTo(x, y0 + 4); c.lineTo(x, y0 - 14); c.stroke();
+    c.fillStyle = i % 2 ? '#ffe27a' : '#fff'; c.beginPath(); c.arc(x, y0 - 15, 2.6, 0, 7); c.fill();
+  }
+}
+function bottle(c, x, y, a) {
+  c.save(); c.translate(x, y); c.rotate(-a);
+  const body = () => {
+    c.beginPath(); c.moveTo(-8, -3.5); c.lineTo(-14, -3.5); c.bezierCurveTo(-20, -3.5, -22, -10, -30, -10); c.lineTo(-68, -10);
+    c.quadraticCurveTo(-74, -10, -74, -4); c.lineTo(-74, 4); c.quadraticCurveTo(-74, 10, -68, 10); c.lineTo(-30, 10);
+    c.bezierCurveTo(-22, 10, -20, 3.5, -14, 3.5); c.lineTo(-8, 3.5); c.closePath();
   };
-  if (ghost) { line(ghost.ld, 0, 'rgba(255,255,255,.4)', 2); line(ghost.li, 1, 'rgba(255,255,255,.4)', 2); }
-  c.shadowColor = 'rgba(11,58,92,.35)'; c.shadowBlur = 3;
-  line(cur.li, 1, '#fff', 2.5); line(cur.ld, 0, '#fff', 3);
-  c.shadowBlur = 0;
-  // лучший угол
-  const mx = X(cur.od), my = Y(cur.ld[cur.od]);
-  c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.arc(mx, my, 6, 0, 7); c.stroke();
-  c.font = 'bold 11px system-ui'; c.fillStyle = NAVY; c.textAlign = 'center';
-  c.fillText(`${cur.od}° · ${(cur.ld[cur.od] * 100).toFixed(0)} см`, Math.min(w - 44, Math.max(L + 30, mx)), Math.max(T + 8, my - 11));
-  // выбранный угол
-  c.strokeStyle = 'rgba(255,255,255,.8)'; c.lineWidth = 1; c.setLineDash([3, 3]); c.beginPath(); c.moveTo(X(A), T); c.lineTo(X(A), y0); c.stroke(); c.setLineDash([]);
-  c.fillStyle = '#fff'; c.beginPath(); c.arc(X(A), Y(cur.li[A]), 3.5, 0, 7); c.fill();
-  c.fillStyle = '#ffd54a'; c.strokeStyle = '#fff'; c.lineWidth = 2; c.beginPath(); c.arc(X(A), Y(cur.ld[A]), 7, 0, 7); c.fill(); c.stroke();
-  // бутылка, наклонённая на угол A
-  c.save(); c.translate(w - 56, 52); c.rotate(-A * Math.PI / 180);
-  c.strokeStyle = '#8a5a34'; c.lineWidth = 3; c.beginPath(); c.moveTo(-34, 0); c.lineTo(-52, 0); c.stroke();
-  c.fillStyle = 'rgba(255,255,255,.9)'; c.beginPath(); c.roundRect(-34, -9, 40, 18, 5); c.fill();
-  c.fillStyle = '#bfe3fb'; c.beginPath(); c.roundRect(-32, -7, 22, 14, 4); c.fill();
-  c.fillStyle = '#2563eb'; c.fillRect(6, -4, 6, 8);
-  c.fillStyle = '#2b2b2b'; c.fillRect(-24, -10, 3, 20); c.fillRect(-10, -10, 3, 20);
-  c.strokeStyle = '#fff'; c.lineWidth = 2; c.setLineDash([4, 3]); c.beginPath(); c.moveTo(13, 0); c.lineTo(34, 0); c.stroke();
+  body(); const gl = c.createLinearGradient(0, -10, 0, 10);
+  gl.addColorStop(0, 'rgba(210,240,255,.5)'); gl.addColorStop(1, 'rgba(150,210,240,.18)'); c.fillStyle = gl; c.fill();
+  c.save(); body(); c.clip();
+  const f = Math.min(1, val('H') / 100), wg = c.createLinearGradient(0, -10, 0, 10);
+  wg.addColorStop(0, 'rgba(90,200,245,.85)'); wg.addColorStop(1, 'rgba(25,120,200,.9)');
+  c.fillStyle = wg; c.fillRect(-74, -11, 66 * (.2 + .8 * f), 22);
+  c.fillStyle = '#1d6fc4'; c.fillRect(-58, -11, 20, 22);
+  c.fillStyle = '#fff'; c.font = 'bold 6px system-ui'; c.textAlign = 'center'; c.fillText('chorro', -48, 2);
+  c.restore();
+  body(); c.strokeStyle = 'rgba(255,255,255,.6)'; c.lineWidth = 1.2; c.stroke();
+  c.strokeStyle = 'rgba(255,255,255,.55)'; c.lineWidth = 1.5; c.beginPath(); c.moveTo(-66, -7); c.lineTo(-32, -7); c.stroke();
+  c.fillStyle = '#2b7fe0'; c.beginPath(); c.roundRect(-9, -4.5, 9, 9, 2); c.fill();
+  c.strokeStyle = 'rgba(255,255,255,.4)'; c.lineWidth = 1;
+  for (let i = -7; i < 0; i += 2.5) { c.beginPath(); c.moveTo(i, -4); c.lineTo(i, 4); c.stroke(); }
   c.restore();
 }
+const tab = n => { $('au').hidden = !n; $('t1').classList.toggle('on', !n); $('t2').classList.toggle('on', !!n); if (!n) draw(); };
+$('t1').onclick = () => tab(0); $('t2').onclick = () => tab(1);
 
 function draw() { V ? drawScene() : drawGraph(); }
 
@@ -181,22 +214,13 @@ function drawScene() {
   const cv = $('c'), dpr = window.devicePixelRatio || 1, w = cv.clientWidth, H = cv.clientHeight;
   cv.width = w * dpr; cv.height = H * dpr;
   const c = cv.getContext('2d'); c.scale(dpr, dpr);
-  const GH = 34, L = 66, R = 16, T = 14, y0 = H - GH, NAVY = '#0b3a5c', GR = '#163d1a';
+  const GH = 34, L = 66, R = 16, T = 14, y0 = H - GH, NAVY = '#e3f3fb', GR = '#e6f6d8';
   const h = val('h') / 100, ar = A * Math.PI / 180;
-  const tD = simTraj(cur.v0, ar, h, val('k')), tI = idealTraj(cur.v0, ar, h);
+  const tD = simTraj(cur.v0, ar, h, 0), tI = idealTraj(cur.v0, ar, h);
   if (!scPx) scPx = fitScale();
   const sc = scPx, xmax = (w - L - R) / sc, X = v => L + v * sc, Y = v => y0 - v * sc;
   const my = Y(h);
-  // небо, облака, трава
-  c.fillStyle = '#7cc7fa'; c.fillRect(0, 0, w, H);
-  c.fillStyle = 'rgba(255,255,255,.7)';
-  [[w * 0.12, 40, 1], [w * 0.55, 26, 0.6]].forEach(([x, y, k]) => {
-    [[0, 0, 10], [14, -6, 13], [30, 0, 9]].forEach(([dx, dy, r]) => { c.beginPath(); c.arc(x + dx * k, y + dy * k, r * k, 0, 7); c.fill(); });
-    c.fillRect(x, y, 30 * k, 9 * k);
-  });
-  c.fillStyle = '#76a852'; c.fillRect(0, y0, w, GH);
-  c.fillStyle = '#5f9444';
-  for (let x = 16; x < w; x += 46) { c.beginPath(); c.moveTo(x, y0); c.lineTo(x + 4, y0 - 9); c.lineTo(x + 8, y0); c.fill(); }
+  bg(c, w, H, y0);
   // линейка в сантиметрах
   const tg = xmax / 4, st = Math.pow(10, Math.floor(Math.log10(tg))), mm = [1, 2, 5, 10].find(q => tg <= q * st) * st;
   c.font = '10px system-ui'; c.textAlign = 'center'; c.strokeStyle = GR; c.fillStyle = GR; c.lineWidth = 1;
@@ -219,8 +243,8 @@ function drawScene() {
     c.strokeStyle = '#fff'; c.lineWidth = lw; c.setLineDash(dash ? [7, 5] : []); c.beginPath();
     t.xs.forEach((v, i) => i ? c.lineTo(X(v), Y(t.ys[i])) : c.moveTo(X(v), Y(t.ys[i]))); c.stroke(); c.setLineDash([]);
   };
-  c.shadowColor = 'rgba(11,58,92,.35)'; c.shadowBlur = 3;
-  path(tI, 1, 2.5); path(tD, 0, 3);
+  c.shadowBlur = 0;
+  path(tD, 0, 3);
   c.shadowBlur = 0;
   // всплеск и подпись дальности
   const xe = tD.xs[tD.xs.length - 1];
@@ -236,15 +260,8 @@ function drawScene() {
     c.font = 'bold 10px system-ui'; c.textAlign = 'left';
     c.fillText('h ' + (h * 100).toFixed(0), 17, Math.min(y0 - 8, Math.max(T + 8, (y0 + my) / 2)));
   }
-  // бутылка: носик в точке начала струи
   sceneP = { x: X(0), y: Y(h) };
-  c.save(); c.translate(sceneP.x, sceneP.y); c.rotate(-ar);
-  c.strokeStyle = '#8a5a34'; c.lineWidth = 3; c.beginPath(); c.moveTo(-46, 0); c.lineTo(-66, 0); c.stroke();
-  c.fillStyle = 'rgba(255,255,255,.92)'; c.beginPath(); c.roundRect(-46, -9, 40, 18, 5); c.fill();
-  c.fillStyle = '#bfe3fb'; c.beginPath(); c.roundRect(-44, -7, 22, 14, 4); c.fill();
-  c.fillStyle = '#2563eb'; c.fillRect(-6, -4, 6, 8);
-  c.fillStyle = '#2b2b2b'; c.fillRect(-36, -10, 3, 20); c.fillRect(-22, -10, 3, 20);
-  c.restore();
+  bottle(c, sceneP.x, sceneP.y, ar);
   c.fillStyle = '#ffd54a'; c.strokeStyle = '#fff'; c.lineWidth = 1.5; c.beginPath(); c.arc(sceneP.x, sceneP.y, 3.5, 0, 7); c.fill(); c.stroke();
 }
 
@@ -254,13 +271,12 @@ function fitScale() {
     (y0 - T) / Math.max(0.05, h + cur.v0 * cur.v0 / (2 * G), ...runs.flatMap(t => t.ys))) * 0.95;
 }
 function btn() {
-  $('g').textContent = V ? 'Запомнить опыт' : (ghost ? 'Забыть кривую' : 'Запомнить кривую');
+  $('g').textContent = V ? 'Запомнить опыт' : (ghost ? 'Забыть' : 'Запомнить');
   $('e').hidden = !(V && runs.length);
 }
 function setV(v) {
   V = v;
   document.querySelectorAll('.dots i').forEach((d, i) => d.classList.toggle('on', i === V));
-  $('lb').style.display = V ? 'none' : '';
   $('c').style.touchAction = 'none';
   $('zg').style.visibility = V ? 'visible' : 'hidden';
   $('c').style.cursor = V ? 'grab' : 'ew-resize';
@@ -276,7 +292,7 @@ P.forEach(p => $(p.id).addEventListener('input', compute));
 $('m').onclick = () => setA(A - 1);
 $('p').onclick = () => setA(A + 1);
 $('g').onclick = () => {
-  if (V) { const t = simTraj(cur.v0, A * Math.PI / 180, val('h') / 100, val('k')); runs.push({ a: A, xs: t.xs, ys: t.ys }); if (runs.length > 6) runs.shift(); }
+  if (V) { const t = simTraj(cur.v0, A * Math.PI / 180, val('h') / 100, 0); runs.push({ a: A, xs: t.xs, ys: t.ys }); if (runs.length > 6) runs.shift(); }
   else ghost = ghost ? null : { li: cur.li, ld: cur.ld };
   btn(); draw();
 };
@@ -288,7 +304,7 @@ const mv = e => {
     const dx = e.clientX - r.left - sceneP.x, dy = e.clientY - r.top - sceneP.y;
     if (Math.hypot(dx, dy) < 14) setA(a0 + (yd - e.clientY) / 2);
     else { let d = ptrAng(e) - th0; d = ((d + 540) % 360) - 180; setA(a0 + d); }
-  } else { const L = 46, R = 12; setA((e.clientX - r.left - L) / (r.width - L - R) * 90); }
+  } else { const L = 30, R = 30; setA((e.clientX - r.left - L) / (r.width - L - R) * 90); }
 };
 cv.addEventListener('pointerdown', e => { e.preventDefault(); drag = true; cv.setPointerCapture(e.pointerId); a0 = A; th0 = ptrAng(e); yd = e.clientY; mv(e); });
 cv.addEventListener('pointermove', e => { if (drag) mv(e); });

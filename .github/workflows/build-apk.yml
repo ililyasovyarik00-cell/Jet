@@ -40,6 +40,27 @@ jobs:
           EOF
           npx cap add android
 
+      - name: Developer page
+        run: |
+          python3 - <<'EOF'
+          snippet = """
+          <button id="dev-btn" aria-label="О разработчике" style="position:fixed;right:12px;top:calc(12px + env(safe-area-inset-top,0px));z-index:99998;width:36px;height:36px;border-radius:50%;border:none;background:#0284c7;color:#fff;font:bold 18px sans-serif;box-shadow:0 2px 8px rgba(0,0,0,.3)">i</button>
+          <div id="dev-page" style="display:none;position:fixed;inset:0;z-index:99999;background:#fff;color:#111;font-family:sans-serif;padding:calc(32px + env(safe-area-inset-top,0px)) 24px 24px;overflow:auto">
+          <h2 style="margin:0 0 16px">О разработчике</h2>
+          <p style="font-size:18px;line-height:1.5">Приложение «chorro» создал <b>Ильясов Ярослав</b>, обучающийся группы <b>1РУПО2</b>.</p>
+          <button id="dev-close" style="margin-top:24px;padding:12px 24px;border:none;border-radius:8px;background:#0284c7;color:#fff;font-size:16px">Закрыть</button>
+          </div>
+          <script>
+          document.getElementById("dev-btn").onclick = function () { document.getElementById("dev-page").style.display = "block"; };
+          document.getElementById("dev-close").onclick = function () { document.getElementById("dev-page").style.display = "none"; };
+          </script>
+          """
+          p = "www/index.html"
+          html = open(p, encoding="utf-8").read()
+          i = html.rfind("</body>")
+          html = html + snippet if i == -1 else html[:i] + snippet + html[i:]
+          open(p, "w", encoding="utf-8").write(html)
+          EOF
       - name: Icon
         run: |
           pip install --break-system-packages pillow || sudo apt-get install -y python3-pil
